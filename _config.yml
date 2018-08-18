@@ -67,7 +67,7 @@ feed:
 safe: False
 lsi: False
 username: karthikchintala1
-repo: jasper2
+repo: karthikchintala1.github.io
 branch: master
 relative_source: ../jasper2/
 destination: ../jasper2-pages/
