@@ -8,12 +8,12 @@ language: 'en-uk'
 baseurl: /
 
 # Website info
-title: Ghost
-description: The professional publishing platform
+title: Code Rethinked
+description: A .NET developers blog
 cover: assets/images/blog-cover.jpg
-logo: assets/images/blog-icon.png
+logo: #assets/images/blog-icon.png
 logo_dark: assets/images/favicon.png
-favicon: assets/images/favicon.png
+favicon: assets/images/favicon.ico
 production_url: https://karthikchintala1.github.io
 source_url: https://github.com/karthikchintala1/jasper2/
 
@@ -30,7 +30,7 @@ disqus: true
 disqus_shortname: www-coderethinked-com # replace with your disqus username
 
 # Google Analytics
-google_analytics:  # replace with your GA tracking identifier
+google_analytics: UA-121883857-1 # replace with your GA tracking identifier
 
 # Permalinks
 permalink: /:title
@@ -41,7 +41,8 @@ permalink: /:title
 # Tags' info in `_data/tags_info.yml`
 
 # gems and other configs
-plugins: [jekyll-paginate, jekyll-feed]
+url: https://coderethinked.com
+plugins: [jekyll-paginate, jekyll-feed, jekyll-sitemap]
 
 feed:
   path: feed.xml

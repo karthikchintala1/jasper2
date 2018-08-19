@@ -5,7 +5,7 @@ cover: assets/images/bus.jpg
 navigation: True
 title: Gettysburg Address
 date: 1863-11-19 10:18:00
-tags:
+tags: abraham lincoln
 class: post-template
 subclass: 'post'
 author: abraham

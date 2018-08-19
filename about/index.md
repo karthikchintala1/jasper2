@@ -8,10 +8,9 @@ class: page-template
 subclass: 'post page'
 ---
 
-Ghost is professional publishing platform designed for modern journalism. This is a demo site of a basic Ghost install to give you a general sense of what a new Ghost site looks like when set up for the first time.
+I am a software developer working on Microsoft.Net platform in an organization in India. I'm a JavaScript/JQuery enthusiast. In my spare time, I write blog posts and work on some private projects. Mostly I love to be a C# guy but as the role in my company demands to work on both UI and API.
 
-> If you'd like to set up a site like this for yourself, head over to [Ghost.org](https://ghost.org/) and start a free 14 day trial to give Ghost a try!
+### About this Blog
+This blog is all about programming and may be sometimes any miscellaneous stuff. I'll not be publishing post's on every keyword in C#. The posts in this blog will be intermediate and sometimes advanced stuff that some people out there might not be able to understand.
 
-If you're a developer: Ghost is a completely open source (MIT) Node.js application built on a JSON API with an Ember.js admin client. It works with MySQL and SQLite, and is publicly available [on Github](https://github.com/TryGhost/ghost).
-
-If you need help with using Ghost, you'll find a ton of useful articles on [our knowledgebase](https://help.ghost.org/), as well as extensive [developer documentation](https://docs.ghost.org/).
+Most of the stuff in this blog is inspired by real world problems that cause in day to day life of a developer. So, it might be random.
