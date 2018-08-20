@@ -92,3 +92,4 @@ exclude:
   - changelog.md
   - "*.Rmd"
   - .git*
+  - _mdwriter.cson
