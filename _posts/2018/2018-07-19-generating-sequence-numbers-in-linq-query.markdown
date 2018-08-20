@@ -1,7 +1,7 @@
 ---
 layout: "post"
 title: "Generating Sequence Numbers In LINQ Query"
-date: "2018-08-19 18:15"
+date: "2018-07-19 18:15"
 navigation: true
 layout: post
 current: post
