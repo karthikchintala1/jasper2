@@ -1,9 +1,10 @@
-<form method="post" action="/subscribe/" class="">
+<form method="post" action="https://feedburner.google.com/fb/a/mailverify" target="popupwindow" onsubmit="window.open('https://feedburner.google.com/fb/a/mailverify?uri=coderethinked1', 'popupwindow', 'scrollbars=yes,width=550,height=520');return true">
     <input class="confirm" type="hidden" name="confirm"  /><input class="location" type="hidden" name="location"  /><input class="referrer" type="hidden" name="referrer"  />
 
     <div class="form-group">
         <input class="subscribe-email" type="email" name="email"  placeholder="youremail@example.com" />
+        <input type="hidden" value="coderethinked1" name="uri" /><input type="hidden" name="loc" value="en_US" />
     </div>
-    <button class="" type="submit" {% unless site.subscribe %}disabled{% endunless %}><span>Subscribe</span></button>
+    <button class="" type="submit"><span>Subscribe</span></button>
     <script type="text/javascript">(function(g,h,o,s,t){h[o]('.location')[s]=h[o]('.location')[s] || g.location.href;h[o]('.referrer')[s]=h[o]('.referrer')[s] || h.referrer;})(window,document,'querySelector','value');</script>
 </form>
