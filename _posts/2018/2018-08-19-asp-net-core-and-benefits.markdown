@@ -10,6 +10,7 @@ subclass: 'post'
 author: karthikchintala
 tags: [ASP.NET CORE, ASP.NET vNext, Benefits]
 cover: 'assets/covers/benefits.jpg'
+description: ASP.NET Core and Benefits
 ---
 
 ASP.NET Core is the new web framework for the Microsoft technologies. We'll see the benefits of using the framework.

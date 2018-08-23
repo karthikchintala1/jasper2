@@ -10,6 +10,7 @@ subclass: 'post'
 author: karthikchintala
 tags: [ASP.NET Core 2.1]
 cover: 'assets/covers/jumpstart.jpg'
+description: getting started with ASP.NET Core 2.1
 ---
 
 This post is just an introductory post on the ASP.NET Core application. In this post, we'll create an ASP.NET Core application and we'll examine the folders and code.

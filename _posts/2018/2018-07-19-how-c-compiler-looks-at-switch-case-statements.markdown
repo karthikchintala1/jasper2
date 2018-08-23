@@ -10,6 +10,7 @@ subclass: 'post'
 author: karthikchintala
 tags: C# IL Refactoring Switch
 cover: 'assets/covers/binary_code.jpg'
+description: c# compiler looking at switch case statements
 ---
 
 Every developer writes a switch case statement at least once in their life of programming but as he/she understands the switch is no longer maintainable they tend to look for patterns and do refactoring.

@@ -10,6 +10,7 @@ class: post-template
 subclass: 'post'
 author: karthikchintala
 cover: 'assets/covers/awaiting.jpg'
+description: awaiting a method vs await a task
 ---
 Most developers just await on methods instead of awaiting on Tasks returned by the awaiter. An awaiter is something that is returned by the method that is awaited.
 In this post, we'll examine what happens when we await on methods instead of a task when we have multiple awaits in the method.

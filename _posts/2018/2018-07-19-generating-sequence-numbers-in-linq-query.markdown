@@ -10,6 +10,7 @@ subclass: 'post'
 author: karthikchintala
 tags: C# LINQ ROW_NUMBER
 cover: 'assets/covers/sequence.jpg'
+description: generating sequence numbers in LINQ query
 ---
 In this post, we'll see how to generate sequence numbers along with the data that we need in LINQ C#.
 
