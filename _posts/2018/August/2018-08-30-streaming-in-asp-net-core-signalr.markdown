@@ -11,9 +11,10 @@ author: karthikchintala
 tags: ["ASP.NET Core", "SignalR", "Streaming"]
 cover: 'assets/covers/'
 description: This is a tutorial for streaming in ASP.NET CORE SignalR.
+
 ---
 
-In this post we'll see how to stream the data in ASP.NET Core SignalR. With ASP.NET  Core 2.1 released, SignalR now supports streaming content.
+In this post, we'll see how to stream the data in ASP.NET Core SignalR. With ASP.NET  Core 2.1 released, SignalR now supports streaming content.
 
 ### What is a [Stream](https://www.webopedia.com/TERM/S/streaming.html)?
 
@@ -21,15 +22,15 @@ In this post we'll see how to stream the data in ASP.NET Core SignalR. With ASP.
 
 ### When to stream?
 
-In the scenarios where the data will with some latency from the server and we don't have to wait for the content to arrive. For this scenario we can use data streaming.
+In the scenarios where the data will with some latency from the server and we don't have to wait for the content to arrive. For this scenario, we can use data streaming.
 
-This can also be useful when we don't want to get all the data at a time as this might be time consuming. So, we'll send the data in chunks/fragments from server to client.
+This can also be useful when we don't want to get all the data at a time as this might be time-consuming. So, we'll send the data in chunks/fragments from the server to the client.
 
----
+------
 
-Now, we'll see how to setup the `ASP.NET Core SignalR` in Visual Studio.
+Now, we'll see how to set up the `ASP.NET Core SignalR` in Visual Studio.
 
-### Creating ASP.NET CORE Application
+### Creating ASP.NET Core Application
 
 It's always the same thing Go over to `File` >> `New Project` and give it a name.
 
@@ -45,13 +46,13 @@ We'll start writing our Hubs now.
 
 ### Hub setup
 
-Unlike normal signalR methods, the stream methods will be different as they have stream the content over time when the chunks of data is available.
+Unlike normal signalR methods, the stream methods will be different as they have stream the content over time when the chunks of data are available.
 
 Create a C# file in the project with the name as `StreamHub` or whatever. It is better to add it in a Folder though.
 
 Derive that from `Hub` class and add a namespace in the file as `using Microsoft.AspNetCore.SignalR;`
 
-Now, create a method in the class with the return type as `ChannelReader<T>` here T is the type of the value returned. The `ChannelReader` return type on a method makes a streaming hub method. Here is the code for streaming our data.
+Now, create a method in the class with the return type as `ChannelReader<T>` where T is the type of the value returned. The `ChannelReader` return type on a method makes a streaming hub method. Here is the code for streaming our data.
 
 ```csharp
 public ChannelReader<int> DelayCounter(int delay)
@@ -81,7 +82,7 @@ public ChannelReader<int> DelayCounter(int delay)
 
 - `DelayCounter` is our streaming method, this takes a delay parameter to specify from the client end.
 - `WriteItems` is a private method and this returns a `Task`.
-- The last line in the `WriteItems` is `.TryComplete()` on the stream says stream is completed and is closed to the client.
+- The last line in the `WriteItems` is `.TryComplete()` on the stream says the stream is completed and is closed to the client.
 
 ### Configuring SignalR in the project
 
@@ -91,7 +92,7 @@ public ChannelReader<int> DelayCounter(int delay)
    services.AddSignalR();
    ```
 
-2. We also need to add route for signalR stream. Now, head over to the `Configure` method in the Startup class and add the following
+2. We also need to add a route for the signalR stream. Now, head over to the `Configure` method in the Startup class and add the following
 
    ```csharp
    app.UseSignalR(routes =>
@@ -108,17 +109,17 @@ Launch **Package Manager Console** (PMC) from the Visual Studio and navigate to 
 
 > cd CodeRethinked.SignalRStreaming
 
-Run npm init to create package.json file
+Run npm init to create a package.json file
 
 > npm init -y
 
-Ignore the warnings. Install the signalr client library
+Ignore the warnings. Install the signalR client library
 
 > npm install @aspnet/signalr
 
-The npm install downloads the signalr client library to a sub folder under `node_modules` folder.
+The npm install downloads the signalR client library to a subfolder under `node_modules` folder.
 
-### Copy the signalr from node_modules
+### Copy the signalR from node_modules
 
 Copy the `signalr.js` file from the `<project_folder>\node_modules\@aspnet\signalr\dist\browser` to a folder in `wwwroot\lib\signalr`.
 
@@ -128,7 +129,7 @@ Alternatively, you could also make use of the `Microsoft Library Manager` (libma
 
 If you don't have any idea of what libman.json is. Check this article on [Libman](http://coderethinked.com/libman-microsoft-library-manager-for-client-side-libraries).
 
-So, your libman for adding downloaded signalr should look like this.
+So, your Libman for adding downloaded signalR should look like this.
 
 ```json
 {
@@ -144,11 +145,11 @@ So, your libman for adding downloaded signalr should look like this.
 }
 ```
 
-Once you've saved libman.json our signalr.js will be available in signalr folder in lib.
+Once you've saved libman.json our signalr.js will be available in the SignalR folder in lib.
 
 ### HTML for streaming
 
-Copy the following HTML into `Index.chtml`. For the purpose of the article, I'm removing the existing html in in `Index.cshtml` and adding the following.
+Copy the following HTML into `Index.chtml`. For the purpose of the article, I'm removing the existing HTML in `Index.cshtml` and adding the following.
 
 ```html
 @page
@@ -237,9 +238,9 @@ document.getElementById("streamButton").addEventListener("click", (event) => __a
 }))();
 ```
 
-As ASP.NET SignalR now uses ES 6 features and not all browsers support ES 6 features. So, inorder for it to work in all browser it is recommended to use transpilers such as babel.
+As ASP.NET SignalR now uses ES 6 features and not all browsers support ES 6 features. So, in order for it to work in all browser, it is recommended to use transpilers such as babel.
 
-Unlike traditional signalR we now have different syntax for creating a connection.
+Unlike traditional signalR, we now have different syntax for creating a connection.
 
 ```js
 var connection = new signalR.HubConnectionBuilder()
@@ -247,12 +248,12 @@ var connection = new signalR.HubConnectionBuilder()
     .build();
 ```
 
-And for regular signalr connections, we'll add listeners with `.on` method but this is stream so we have stream method that accepts two arguments.
+And for regular signalR connections, we'll add listeners with `.on` method but this is stream so we have stream method that accepts two arguments.
 
-- Hub method name: Our hub name is DelayCounter
+- Hub method name: Our hub name is `DelayCounter`
 - Arguments to the Hub method: In our case arguments is a delay between the streams.
 
-`connection.stream` will have subscribe method to subscribe for events. We'll wireup for next, complete and error events and display messages in the `messagesList` element.
+`connection.stream` will have subscribe method to subscribe for events. We'll wire up for next, complete and error events and display messages in the `messagesList` element.
 
 ```js
 connection.stream("DelayCounter", 500)
@@ -275,7 +276,7 @@ connection.stream("DelayCounter", 500)
 });
 ```
 
-The code before/after the stream connection are related to async and starting a connection as soon as we hit the js file.
+The code before/after the stream connection is related to async and starting a connection as soon as we hit the js file.
 
 Here is the output of the stream
 
@@ -285,11 +286,11 @@ See it in action
 
 ![streaming data in asp net core signalr](assets/posts/streaming_signalr/streaming.gif)
 
-I've modified the `StreamHub` class to have the count upto 10 in above gif image so that it wont take any longer.
+I've modified the `StreamHub` class to have the count up to 10 in above gif image so that it won't take any longer.
 
-Notice the delay from the item 6-10 when streaming this is because we've doubled the amount of delay for every 5 items. This can thought as streaming the data only when available. So, the 6th item is streamed when it is available.
+Notice the delay from the item 6-10 when streaming this is because we've doubled the amount of delay for every 5 items. This can be thought of as streaming the data only when available. So, the 6th item is streamed when it is available.
 
-So, if you have large amount of data to be sent to the client, then go for streaming instead of sending the data at once.
+So, if you have a large amount of data to be sent to the client, then go for streaming instead of sending the data at once.
 
 ### Source code download
 
@@ -301,8 +302,8 @@ source code on [github](https://github.com/karthikchintala1/CodeRethinked.Signal
 
 Streaming the content is not new but it is in signalR now and a great feature. Streaming will keep user experience pretty cool and also our server won't have those high bars (peak timings).
 
-Most of the developers know the limitations of SignalR not being able to transmit huge amount of data.
+Most of the developers know the limitations of SignalR not being able to transmit a huge amount of data.
 
-With ASP.NET Core SignalR, streaming the data from server to client overcomes the problem of transferring all the content at once.
+With ASP.NET Core SignalR, streaming the data from the server to client overcomes the problem of transferring all the content at once.
 
-I'd recommend to go for streaming content when you think your data is large or if you want some user experience without blocking the client by showing endless spinners.
+I'd recommend going for streaming content when you think your data is large or if you want some user experience without blocking the client by showing endless spinners.
