@@ -9,7 +9,7 @@ class: post-template
 subclass: 'post'
 author: karthikchintala
 tags: ["ASP.NET Core", "SignalR", "Streaming"]
-cover: 'assets/covers/'
+cover: 'assets/covers/streaming.jpg'
 description: This is a tutorial for streaming in ASP.NET CORE SignalR.
 
 ---
