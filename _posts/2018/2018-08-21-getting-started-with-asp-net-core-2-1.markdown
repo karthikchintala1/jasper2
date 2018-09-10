@@ -74,7 +74,7 @@ The `Program.cs` also sets the startup using `.UseStartup` method.
 
 Let’s see what we have in the Startup.cs class
 
-```csharp
+{% highlight csharp %}
 namespace Coderethinked.Web
 {
     public class Startup
@@ -126,17 +126,17 @@ namespace Coderethinked.Web
         }
     }
 }
-```
+{% endhighlight %}
 
 The `ConfigureServices` method is called by the runtime as indicated in the comments above the method. This method can be used to add services.
 
 Ex:
-```
+{% highlight csharp %}
 services.AddAntiforgery();
 services.AddCors();
 services.AddAuthorization();
 services.AddAuthentication();
-```
+{% endhighlight %}
 
 There are several other options to add into this Configure services method.
 
@@ -163,7 +163,7 @@ This JSON file is to configure holds the configurations to run the application.
 
 As we are running the application on IIS Express, the necessary configuration for IIS Express is utilized.
 
-```json
+{% highlight json %}
 "iisSettings":{
    "windowsAuthentication":false,
    "anonymousAuthentication":true,
@@ -172,7 +172,7 @@ As we are running the application on IIS Express, the necessary configuration fo
       "sslPort":44307
    }
 }
-```
+{% endhighlight %}
 
 In the above JSON, we have applicationUrl: `http://localhost:51681` and a sslPort: 44307 is allocated. So, 44307 is for SSL port meaning this is for accessing the site with HTTPS://. So https://localhost:44307 is secured while http://localhost:51681 is just a plain HTTP which is not secured.
 

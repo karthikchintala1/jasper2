@@ -58,13 +58,13 @@ One of the good things about this LibMan integration into Visual Studio is that 
 Let's map the jQuery to the solution/project folder.
 
 Add the following into the `libraries` array of `libman.json`
-```json
+{% highlight json %}
 {
       "library": "jquery@3.3.1",
       "destination": "lib/jQuery_3.3.1",
       "provider": "cdnjs"
 }
-```
+{% endhighlight %}
 
 After you copy and paste the above code. Save the file. Now the jQuery files should be downloaded as you can see in the output window.
 
@@ -78,14 +78,15 @@ Notice that only a few js files are downloaded and no `CSS` files are downloaded
 
 You can customize the files that you want to download using the files options inside a library object
 Ex:
-```json
+{% highlight json %}
 {
       "library": "jqueryui@1.12.1",
       "destination": "lib/jQuery_UI",
       "provider": "cdnjs",
       "files": [ "jquery-ui.css", "images/ui-icons_444444_256x240.png" ]
 }
-```
+{% endhighlight %}
+
 So, you can download whatever the files you want.
 
 ### Restoring manually
@@ -104,16 +105,16 @@ This will prompt you for an alert dialog in Visual Studio
 
 This will add a package to the packages in the package.json file as we are in a web project.
 
-```xml
+{% highlight xml %}
 <?xml version="1.0" encoding="utf-8"?>
 <packages>
   <package id="Microsoft.Web.LibraryManager.Build" version="1.0.163" targetFramework="net40" />
 </packages>
-```
+{% endhighlight %}
 
 If you are on a csharp project, then a package reference will be added in the `.csproj` file
 
-```xml
+{% highlight xml %}
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
@@ -126,7 +127,7 @@ If you are on a csharp project, then a package reference will be added in the `.
   </ItemGroup>
 
 </Project>
-```
+{% endhighlight %}
 
 ### Takeaway
 LibMan is a great addition to the visual studio. LibMan will avoid you to stop downloading the client side libraries from the web and unzip them and add it to the appropriate library folders that we wish to have. A cleaner way to set up the client side libraries without much effort.

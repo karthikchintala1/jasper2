@@ -25,7 +25,7 @@ It's little confusing with all the awaiters and awaitables. If you don't underst
 
 For the purpose of this article, I'll test this in a Console application. Here goes our AwaitTest class.
 
-```csharp
+{% highlight csharp %}
 public class AwaitTest  
 {  
     public async Task DoSomeThingAsync()  
@@ -45,12 +45,12 @@ public class AwaitTest
         return 30;  
     }  
 }
-```
+{% endhighlight %}
 So, our DoSomethingAsync() has two awaitables here. One that takes 5 seconds to execute and the other takes 2 seconds to execute. Now, we'll call this in the Main method of our app and see how this goes.
 
 Here is how we call our async method in the Main method of the application.
 
-```csharp
+{% highlight csharp %}
 public class Program  
 {  
     static void Main(string[] args)  
@@ -60,7 +60,7 @@ public class Program
     }  
 
 }
-```
+{% endhighlight %}
 With the above code in DoSomeThingAsync() method, can you guess the timing of the operation?
 Well, the time taken for DoSomeThingAsync() to complete the operation is
 
@@ -87,7 +87,7 @@ Instead of awaiting the method directly, we'll await on the Task instead of the 
 
 I'll modify the DoSomeThingAsync() method here so that we'll await on Task
 
-```csharp
+{% highlight csharp %}
 public async Task DoSomeThingAsync()  
 {  
     var time = Stopwatch.StartNew();  
@@ -104,7 +104,7 @@ public async Task DoSomeThingAsync()
 
     Console.WriteLine("time taken : " + time.Elapsed);  
 }  
-```
+{% endhighlight %}
 Now, guess the timing. Here's the output,
 
 > time taken : 00:00:05.0080029
@@ -113,17 +113,17 @@ What changed the timing now?
 
 Let's see what happened in the code.
 
-```
+{% highlight csharp %}
 Task t1 = Task.Delay(5000);  
 Task t2 = PerformCalculationsAsync();
-```
+{% endhighlight %}
 
 The above two lines just return immediately when debugged (it doesn't mean that the operation of those two is not completed). Instead, t1 and t2 will have their own Tasks returned.
 
-```
+{% highlight csharp %}
 await t1;  
 await t2;  
-```
+{% endhighlight %}
 
 When the first await t1; is executed it returns a Task and then the second await t2; will begin its execution. So, by the time the first task is completed the second task will be completed as the second task takes 2 seconds while the first task takes 5 seconds to complete.
 

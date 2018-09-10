@@ -54,7 +54,7 @@ Derive that from `Hub` class and add a namespace in the file as `using Microsoft
 
 Now, create a method in the class with the return type as `ChannelReader<T>` where T is the type of the value returned. The `ChannelReader` return type on a method makes a streaming hub method. Here is the code for streaming our data.
 
-```csharp
+{% highlight csharp %}
 public ChannelReader<int> DelayCounter(int delay)
         {
             var channel = Channel.CreateUnbounded<int>();
@@ -78,7 +78,7 @@ public ChannelReader<int> DelayCounter(int delay)
 
             writer.TryComplete();
         }
-```
+{% endhighlight %}
 
 - `DelayCounter` is our streaming method, this takes a delay parameter to specify from the client end.
 - `WriteItems` is a private method and this returns a `Task`.
@@ -86,20 +86,18 @@ public ChannelReader<int> DelayCounter(int delay)
 
 ### Configuring SignalR in the project
 
-1. Head over to the `Startup` class and locate `ConfigureServices` method and add the following line at the end (skip this if you can configure yourself)
+- Head over to the `Startup` class and locate `ConfigureServices` method and add the following line at the end (skip this if you can configure yourself).
+{% highlight csharp %}
+services.AddSignalR();
+{% endhighlight %}
 
-   ```csharp
-   services.AddSignalR();
-   ```
-
-2. We also need to add a route for the signalR stream. Now, head over to the `Configure` method in the Startup class and add the following
-
-   ```csharp
-   app.UseSignalR(routes =>
-               {
-                   routes.MapHub<StreamHub>("/streamHub");
-               });
-   ```
+- We also need to add a route for the signalR stream. Now, head over to the `Configure` method in the Startup class and add the following.
+{% highlight csharp %}
+app.UseSignalR(routes =>
+{
+   routes.MapHub<StreamHub>("/streamHub");
+});
+{% endhighlight %}
 
 ### Add SignalR client library
 
@@ -119,9 +117,10 @@ Ignore the warnings. Install the signalR client library
 
 The npm install downloads the signalR client library to a subfolder under `node_modules` folder.
 
+
 ### Copy the signalR from node_modules
 
-Copy the `signalr.js` file from the `<project_folder>\node_modules\@aspnet\signalr\dist\browser` to a folder in `wwwroot\lib\signalr`.
+Copy the **signalr.js** file from the `<projectfolder>\node_modules\@aspnet\signalr\dist\browser` to a folder in `wwwroot\lib\signalr`.
 
 or
 
@@ -131,7 +130,7 @@ If you don't have any idea of what libman.json is. Check this article on [Libman
 
 So, your Libman for adding downloaded signalR should look like this.
 
-```json
+{% highlight json %}
 {
   "version": "1.0",
   "defaultProvider": "cdnjs",
@@ -143,7 +142,7 @@ So, your Libman for adding downloaded signalR should look like this.
     }
   ]
 }
-```
+{% endhighlight %}
 
 Once you've saved libman.json our signalr.js will be available in the SignalR folder in lib.
 
@@ -151,7 +150,7 @@ Once you've saved libman.json our signalr.js will be available in the SignalR fo
 
 Copy the following HTML into `Index.chtml`. For the purpose of the article, I'm removing the existing HTML in `Index.cshtml` and adding the following.
 
-```html
+{% highlight html %}
 @page
 @model IndexModel
 @{
@@ -180,7 +179,7 @@ Copy the following HTML into `Index.chtml`. For the purpose of the article, I'm 
 </div>
 <script src="~/lib/signalr/signalr.js"></script>
 <script src="~/js/signalrstream.js"></script>
-```
+{% endhighlight %}
 
 Notice we have `signalrstream.js` at the end. Let's add the js file to stream the content.
 
@@ -188,7 +187,7 @@ Notice we have `signalrstream.js` at the end. Let's add the js file to stream th
 
 create a new `signalrstream.js` file in `wwwroot\js` folder. Add the following code into the js file.
 
-```js
+{% highlight typescript %}
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -236,17 +235,17 @@ document.getElementById("streamButton").addEventListener("click", (event) => __a
         console.error(e.toString());
     }
 }))();
-```
+{% endhighlight %}
 
 As ASP.NET SignalR now uses ES 6 features and not all browsers support ES 6 features. So, in order for it to work in all browser, it is recommended to use transpilers such as babel.
 
 Unlike traditional signalR, we now have different syntax for creating a connection.
 
-```js
+{% highlight javascript %}
 var connection = new signalR.HubConnectionBuilder()
     .withUrl("/streamHub")
     .build();
-```
+{% endhighlight %}
 
 And for regular signalR connections, we'll add listeners with `.on` method but this is stream so we have stream method that accepts two arguments.
 
@@ -255,7 +254,7 @@ And for regular signalR connections, we'll add listeners with `.on` method but t
 
 `connection.stream` will have subscribe method to subscribe for events. We'll wire up for next, complete and error events and display messages in the `messagesList` element.
 
-```js
+{% highlight js %}
 connection.stream("DelayCounter", 500)
     .subscribe({
         next: (item) => {
@@ -274,7 +273,7 @@ connection.stream("DelayCounter", 500)
             document.getElementById("messagesList").appendChild(li);
         },
 });
-```
+{% endhighlight %}
 
 The code before/after the stream connection is related to async and starting a connection as soon as we hit the js file.
 

@@ -18,7 +18,7 @@ Every developer writes a switch case statement at least once in their life of pr
 In this post, we'll see what's actually inside of a switch case statement.
 Here is the snippet of the code
 
-```csharp
+{% highlight csharp %}
 public void M(string x) {
         switch(x)
         {
@@ -33,11 +33,11 @@ public void M(string x) {
                 break;
         }
     }
-```
+{% endhighlight %}
 
 and the IL for the above code
 
-```csharp
+{% highlight csharp %}
 .method public hidebysig
         instance void M (
             string x
@@ -76,7 +76,7 @@ and the IL for the above code
         IL_0043: call void [mscorlib]System.Console::WriteLine(string)
         IL_0048: ret
     } // end of method C::M
-```
+{% endhighlight %}
 ###What's in the IL?
 
 I'll walk through this IL, at Line 12 in the IL there's a string equality checking which checks for the case statement to match once it is matched at Line 18 a `brtrue.s IL_0028`(a branch to target if the value is non-zero) is issued, this will check the result of the above line (the equality comparison).
@@ -87,7 +87,7 @@ Let's consider our best case to match "a" so the control is now transferred to I
 
 So, to give a glimpse of that IL in C# it is like this
 
-```csharp
+{% highlight csharp %}
 public void M(string x)
 {
     if (!(x == "a"))
@@ -109,7 +109,7 @@ public void M(string x)
         Console.WriteLine("a value");
     }
 }
-```
+{% endhighlight %}
 You might be refactoring the above if statements for a cleaner switch case statement but you'd end up with the above code when the compiler transforms the switch.
 
 ### Wrapping up
