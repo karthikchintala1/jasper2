@@ -8,7 +8,7 @@ current: post
 class: post-template
 subclass: 'post'
 author: karthikchintala
-tags: integers, list, linq
+tags: filter, list, linq
 cover: 'assets/covers/linq_oftype.jpg'
 description: How to get only specific type of items from list in C#
 ---
@@ -26,8 +26,10 @@ IEnumerable<int> result = GetOnlyInts(listOfObjects); //the result should b 10, 
 
 We've to implement the solution in `GetOnlyInts()` method so as to return only integers from it.
 
-### A rough thought
+### A Draft thought
 Once you are given that problem, we tend to loop over the content and try to find out the type of each item and store that in another list and return that back.
+
+#### Solution 1
 
 {% highlight csharp %}
 public static IEnumerable<int> GetOnlyInts(List<object> listOfObjects)
@@ -35,19 +37,21 @@ public static IEnumerable<int> GetOnlyInts(List<object> listOfObjects)
     var result = new List<int>();
     foreach(var item in listOfObjects)
     {
-        if(item is int)
+        if (item is int)
           result.Add((int)item);
     }
     return result;
 }
 {% endhighlight %}
 
-But as we think through the list of objects is a List. So, there's no need of the for loop and additional result variable. We'll fine tune here using LINQ.
+But as we think through, the `listOfObjects` is a List. So, there's no need of the for loop and add it to result variable. We'll fine tune here using LINQ.
 
 Ignore the method signature.
 
+#### Solution 2
+
 {% highlight csharp %}
-return listOfItems.Select(a => {
+return listOfObjects.Select(a => {
         return new { success = a is int, val = a };
       })
       .Where(a => a.success) //filter only successful integers
@@ -57,7 +61,7 @@ return listOfItems.Select(a => {
 
 This is a good solution and observe how we eliminated the failed cases in the where clause filter.
 
-### Best solution
+### Best/Short solution
 {% highlight csharp %}
 public static IEnumerable<int> GetOnlyInts(List<object> listOfObjects)
 {
@@ -65,20 +69,12 @@ public static IEnumerable<int> GetOnlyInts(List<object> listOfObjects)
 }
 {% endhighlight %}
 
-This is the best solution to return integers from the list of items. The 'OfType' extension method
-returns only the specific type of item that is requested.
+The 'OfType' extension method only the specific type of item that is requested on.
 
-{% highlight csharp %}
-return listOfItems.Select(a => {
-        return new { success = a is int, val = a };
-      })
-      .Where(a => a.success) //filter only successful integers
-      .Select(v => (int)v.val).ToList(); //return to a list of integers
-});
-{% endhighlight %}
+Let's examine the source code of OfType extension method to see what it has.
 
-### source code of OfType
-https://referencesource.microsoft.com/#System.Core/System/Linq/Enumerable.cs,4ba4a3f8a5530e33
+### OfType() source code
+[Source code link to OfType extension method](https://referencesource.microsoft.com/#System.Core/System/Linq/Enumerable.cs,4ba4a3f8a5530e33)
 
 {% highlight csharp %}
 public static IEnumerable<TResult> OfType<TResult>(this IEnumerable source) {
@@ -93,11 +89,6 @@ static IEnumerable<TResult> OfTypeIterator<TResult>(IEnumerable source) {
 }
 {% endhighlight %}
 
-### Short solution:
+As you can see from the above source code of `OfType` method, it has the same old foreach statement on the `IEnumerable`. But it yield returns the values.
 
-{% highlight csharp %}
-public static IEnumerable<int> GetOnlyInts(List<object> listOfObjects)
-{
-    return listOfObjects.OfType<int>();
-}
-{% endhighlight %}
+If the type of the object is `TResult`, then the value is returned by casting it to `TResult`.
