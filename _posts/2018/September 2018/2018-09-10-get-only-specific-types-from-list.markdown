@@ -8,7 +8,7 @@ current: post
 class: post-template
 subclass: 'post'
 author: karthikchintala
-tags: filter, list, linq
+tags: filter list linq
 cover: 'assets/covers/linq_oftype.jpg'
 description: How to get only specific type of items from list in C#
 ---
