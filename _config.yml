@@ -9,7 +9,7 @@ baseurl: /
 
 # Website info
 title: Code Rethinked
-description: A .NET developers blog
+description: Thoughts on ongoing things in the world of .NET
 cover: assets/images/blog-cover.jpg
 logo: #assets/images/blog-icon.png
 logo_dark: assets/images/favicon.png

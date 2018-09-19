@@ -19,6 +19,14 @@
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
     <style>.hljs { background: none; }</style>
 
+    <!-- single description tag -->
+    {% if page.description %}
+        <meta name="description" content="{{ page.description }}" />
+    {% else if paginator.page > 1 %}
+        <meta name="description" content="This blog is all about ASP.NET Core, C#, JavaScript and some new happenings in the world of .NET (dotnet). - PAGE {{ paginator.page }}" />
+    {% else %}
+        <meta name="description" content="This blog is all about ASP.NET Core, C#, JavaScript and some new happenings in the world of .NET (dotnet)." />
+    {% endif %}
     <!-- This tag outputs SEO meta+structured data and other important settings -->
     {% include head.html %}
 
