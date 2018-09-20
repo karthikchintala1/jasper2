@@ -24,9 +24,17 @@
         <meta name="description" content="{{ page.description }}" />
     {% elsif paginator.page != 1 %}
         <meta name="description" content="This blog is all about ASP.NET Core, C#, JavaScript and some new happenings in the world of .NET (dotnet). - PAGE {{ paginator.page }}" />
+    {% elsif page.class == 'tag-template' %}
+        
     {% else %}
         <meta name="description" content="This blog is all about ASP.NET Core, C#, JavaScript and some new happenings in the world of .NET (dotnet)." />
     {% endif %}
+
+    {% if page.tags %}
+        <meta name="keywords" content="{{ page.tags | join: ', ' | escape }}"/>
+    {% endif %}
+
+
     <!-- This tag outputs SEO meta+structured data and other important settings -->
     {% include head.html %}
 
