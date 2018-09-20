@@ -22,7 +22,7 @@
     <!-- single description tag -->
     {% if page.description %}
         <meta name="description" content="{{ page.description }}" />
-    {% else if paginator.page > 1 %}
+    {% elsif paginator.page != 1 %}
         <meta name="description" content="This blog is all about ASP.NET Core, C#, JavaScript and some new happenings in the world of .NET (dotnet). - PAGE {{ paginator.page }}" />
     {% else %}
         <meta name="description" content="This blog is all about ASP.NET Core, C#, JavaScript and some new happenings in the world of .NET (dotnet)." />

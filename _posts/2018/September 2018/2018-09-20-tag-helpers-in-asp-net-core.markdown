@@ -1,7 +1,7 @@
 ---
 layout: "post"
 title: "Tag Helpers in ASP.NET Core"
-date: "2018-09-19 07:03"
+date: "2018-09-20 06:03"
 navigation: true
 layout: post
 current: post
@@ -10,7 +10,7 @@ subclass: 'post'
 author: karthikchintala
 tags: ["tag helpers", "ASP.NET Core", "razor"]
 cover: 'assets/covers/taghelper.jpg'
-description: Tag helpers in asp.net core
+description: Tag helpers in asp.net core. Tag Helpers allows the developer to use standard HTML tags in view while applying the server side code to customize the HTML elements in the razor files.
 ---
 
 In this post, we'll see how to use the tag helpers inside razor files in ASP.NET Core application.
