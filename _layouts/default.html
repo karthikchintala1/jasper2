@@ -25,7 +25,7 @@
     {% elsif paginator.page != 1 %}
         <meta name="description" content="This blog is all about ASP.NET Core, C#, JavaScript and some new happenings in the world of .NET (dotnet). - PAGE {{ paginator.page }}" />
     {% elsif page.class == 'tag-template' %}
-        
+
     {% else %}
         <meta name="description" content="This blog is all about ASP.NET Core, C#, JavaScript and some new happenings in the world of .NET (dotnet)." />
     {% endif %}
@@ -34,7 +34,9 @@
         <meta name="keywords" content="{{ page.tags | join: ', ' | escape }}"/>
     {% endif %}
 
-
+    {% if site.pinterest %}
+      <meta name="p:domain_verify" content="1d07b2e5275c25a00a5fdb0494ab1656"/>
+    {% endif %}
     <!-- This tag outputs SEO meta+structured data and other important settings -->
     {% include head.html %}
 
