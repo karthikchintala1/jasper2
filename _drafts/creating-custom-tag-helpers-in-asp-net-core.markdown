@@ -36,7 +36,7 @@ For the purpose of this post, we'll override the `Process` method to synchronous
 
 In this article, we'll create a label with color by default. So, the user can supply the color by providing `color` as an attribute to the `colorlabel`.
 
-Ex: 
+Ex:
 
 {% highlight html %}
 
@@ -45,3 +45,5 @@ Ex:
 {% end highlight %}
 
 The above custom tag should output the label as red color.
+
+### Implementing TagHelper class
