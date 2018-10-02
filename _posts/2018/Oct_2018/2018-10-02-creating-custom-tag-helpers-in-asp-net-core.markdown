@@ -1,7 +1,7 @@
 ---
 layout: "post"
 title: "Creating custom tag helpers in ASP.NET Core"
-date: "2018-09-24 10:29"
+date: "2018-10-02 06:00"
 navigation: true
 layout: post
 current: post
@@ -9,8 +9,8 @@ class: post-template
 subclass: 'post'
 author: karthikchintala
 tags: ["ASP.NET Core", "custom tag helpers", "PreElement", "PreContent", "PostContent", "PostElement","SetContent"]
-cover: 'assets/covers/'
-description: How to create custom tag helpers in ASP.NET Core by implementing TagHelper class. In this post, we'll implement the process method of TagHelper class and use the setContent method of TagHelperOutput to set the content of the custom tag helper.
+cover: 'assets/covers/customtaghelper.jpg'
+description: How to create custom tag helpers in ASP.NET Core by implementing TagHelper class. In this post, we'll implement the methods of TagHelper class and use the SetContent method of TagHelperOutput to set the content of the custom tag helper.
 ---
 In this post, we'll see how to create a custom tag helper in ASP.NET Core project.
 
@@ -20,7 +20,7 @@ Custom tag helpers can be created by implementing TagHelper class. The Tag helpe
 
 {% highlight csharp %}
 public abstract class TagHelper : Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper { }
-{% end highlight %}
+{% endhighlight %}
 
 ### Methods of Tag helper class:
 
@@ -44,12 +44,12 @@ Ex:
 
 {% endhighlight %}
 
-The above custom tag should output the label as red color.
+The above custom tag should output the label in red color.
 
 ### Implementing TagHelper class
 We'll create a new `ColorLabelTagHelper` class and let's inherit from TagHelper class which is in `Microsoft.AspNetCore.Razor.TagHelpers` namespace.
 
-Note that `TagHelper` at the end of the class is just a convention. We can omit the convention and just have the name directly.
+Note that `TagHelper` at the end of the class name is just a convention. We can omit the convention and just have the name directly.
 
 {% highlight csharp %}
 
@@ -71,11 +71,12 @@ namespace CustomTagHelpers.TagHelpers
 
 {% endhighlight %}
 
-The `Color` property in the above code acts as an attribute to the `coloredlabel`. So, you can set color from the HTML.
+The `Color` property in the above class will act as an attribute to the `coloredlabel`. So, you can set color from the HTML.
 
-Observe how we are setting the attributes for the tag using `output.Attributes.SetAttribute`. We can set all the html attributes that the element can support.
+Observe how we are setting the attributes for the tag using `output.Attributes.SetAttribute`. We can set all the necessary html attributes that the element can support.
 
-Once we've done that we need to use this tag helper in our views with `@addTagHelper` directive. Goto `_ViewImports.cshtml` file in the views folder and add the following line
+### Access custom tag helper in views
+Once we've done that we need to use this tag helper in our views with the `@addTagHelper` directive. Now, goto `_ViewImports.cshtml` file in the views folder and add the following line
 
 {% highlight csharp %}
 
@@ -87,9 +88,9 @@ You could specify just the namespace of our custom tag helper but here I'm addin
 
 ### Using the custom tag helper in Views
 
-We've implemented the custom tag helper that we can make use of.  Let's go a head and try to get our custom tag helper working.
+Let's go ahead and try to get our custom tag helper working.
 
-For the purpose of this article, I'll clear all the HTML tags in the `Index.cshtml` file and add our awesome `colorlabel` custom tag.
+For the purpose of this article, I'll clear all the existing HTML tags in the `Index.cshtml` file and add our awesome `colorlabel` custom tag.
 
 Here is how the `Index.cshtml` looks after adding the custom tag.
 
@@ -101,19 +102,20 @@ Here is how the `Index.cshtml` looks after adding the custom tag.
 <h2>Index</h2>
 
 <colorlabel color="red">the red color</colorlabel>
-{% end highlight %}
+{% endhighlight %}
 
 Here is the output. Yay
 
-![failed markup in custom tag helper](D:\coderethinked\jasper2\assets\posts\customtaghelper\no_color.png)
+![failed markup in custom tag helper](\assets\posts\customtaghelper\no_color.png)
 
 Note that we didn't get the red color that we've expected. This is because we have the wrong syntax of custom tag helper in place.
 
-The Pascal-cased class and the property names of the tag helpers will be translated into their lower kebab case. So, inorder to use our custom helper class and property, we need to use `<color-label color="red">the red color</color-label>`.
+### custom tag helpers properties to Kebab case
+The Pascal-cased class and the property names of the tag helpers will be translated into their lower kebab case. So, in order to use our custom helper class and property, we need to use `<color-label color="red">the red color</color-label>`.
 
 Let's try that in our Index.cshtml page and see it.
 
-![custom tag helper working](D:\coderethinked\jasper2\assets\posts\customtaghelper\with_red.png)
+![custom tag helper working](\assets\posts\customtaghelper\with_red.png)
 
 We got our custom tag helpers working now.
 
@@ -125,11 +127,17 @@ Let's take a look at the HTML generated
 
 {% endhighlight %}
 
-We have the new tag in the HTML i.e., `coloredlabel` this is because we've specified the output tag name to be `coloredlabel`. And the style attribute on the tag generated as any normal HTML tag would generate.
+We have the new tag in the HTML i.e., `coloredlabel` this is because we've specified the output tag name to be `coloredlabel`.
+
+{%highlight csharp%}
+output.TagName = "coloredlabel";
+{%endhighlight%}
+
+And the style attribute will be generated as any normal HTML tag would generate.
 
 ### Set Content
 
-The `SetContent` method will set the content of the HTML tag. It just sets the content and not the HTML.
+The `SetContent` method will set the content of the HTML tag. Note that this method just sets the content and not the HTML.
 
 Let's modify our coloredlabel class to facilitate the Set content method.
 
@@ -156,9 +164,9 @@ This will just modify only the contents of the tags with red color. So, our colo
 
 ### Pre Content and Post Content
 
-Pre content and Post content can modify the head and tail of the custom tag helper. We can modify the contents of tag, add some custom markup around the custom tag helper like making the text bold or wrapping with some div or span.
+Pre content and Post content can modify the head and tail of the custom tag helper. We can modify the contents of the tag.
 
-Let's see how the appending the content at the beginning and at the end.
+Let's see how to append the content at the beginning and at the end.
 
 {%highlight csharp%}
 
@@ -167,13 +175,13 @@ output.PostContent.Append(" :end");
 
 {%endhighlight%}
 
-The above code when ran will output like this:
+When the above code is executed it will output like this:
 
 > Start: Text from custom helper :end (in red)
 
-Let's try to wrap our custom tag helper content with a *div that has 2px border and blue color*.
+Let's try to wrap our custom tag helper content with a *div that has a 2px border and blue color*.
 
-We've to add add HTML content around our custom tag helper.
+We've to add HTML content around our custom tag helper.
 
 {%highlight csharp%}
 
@@ -194,9 +202,9 @@ Notice how we are ending the div tag with `PostContent`.
 
 This is how it looks like
 
-![Custom Tag helper with wrapping PreContent and PostContent](G:\coderethinked\jasper2\assets\posts\custom tag helper\with_border.png)
+![Custom tag helpers with border](assets\posts\customtaghelper\with_border.png)
 
-Let's examine the HTML of how this is generated.
+Let's examine the generated HTML for the above code.
 
 {%highlight html%}
 
@@ -228,11 +236,11 @@ public override void Process(TagHelperContext context, TagHelperOutput output)
         }
 {%endhighlight%}
 
-we've just replaced PreContent and PostContent it with PreElement and PostElement. Let's see the output
+we've just replaced PreContent and PostContent in the previous example with PreElement and PostElement. Let's see the output
 
-![Custom Tag helper with PreElement and PostElement](G:\coderethinked\jasper2\assets\posts\customtaghelper\with_border.png)
+![Custom Tag helper with PreElement and PostElement](\assets\posts\customtaghelper\with_border.png)
 
-Now, the output is same as Precontent and PostContent. But, the HTML should vary. Let's see the HTML generated.
+Now, the output is the same as `PreContent` and `PostContent`. But, the HTML should vary. Let's see the HTML generated.
 
 {%highlight html%}
 
@@ -242,15 +250,20 @@ Now, the output is same as Precontent and PostContent. But, the HTML should vary
 
 {%endhighlight%}
 
-Did you see the difference here? The `<div>` tag wrapped our custom tag helper in this case.
+Did you see the difference here? The `<div>` tag wrapped around custom tag helper in this case.
 
 So, it is up to the developer whether to use Pre/Post Content or to use Pre/Post Element.
 
 ### Conclusion
-Custom tag helpers allows us to customize the content of the HTML by providing some useful methods to tweak the HTML and render the content dynamically.
+Custom tag helpers allow us to customize the content of the HTML by providing some useful methods to tweak the HTML and render the content dynamically.
 
-- Tag helpers were added with an intension to make the UI developers life easy to mitigate with the HTML. As with any product, everybody will try out the custom helpers and certainly will use custom helpers. If the markup is modified with PostContent, PreContent or with PreElement, PostElement wouldn't the UI developer worry about styling the markup?
+- Tag helpers were added with an intension to make the UI developers life easy to mitigate with the HTML. If the markup is modified with PostContent, PreContent or with PreElement, PostElement the UI developer will have a hard time figuring out how the element is generated/added
 
 - Though the PreContent, PostContent behaved same as PreElement, PostElement. It is up to you to decide what markup you need.
 
 - If we gave the wrong styles or wrong HTML, the markup will be rejected and only the plain HTML will be displayed. This is a good thing. Try it yourself.
+
+Thanks for reading.
+
+#### References
+[Tag helper class from msdn](https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.razor.taghelpers.taghelper?view=aspnetcore-2.1).
