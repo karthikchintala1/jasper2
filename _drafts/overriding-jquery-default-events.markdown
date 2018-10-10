@@ -13,9 +13,9 @@ cover: 'assets/covers/'
 description: How to override the default jQuery event listeners. In this post, we'll customize the logic so that we can override the default jQuery click event.
 ---
 
-In this post, we'll see how to override the jQuery click event.
+There are scenarios when we want to log the information for all the click events happen on our jQuery listeners. In this post, we'll see how to override the jQuery click event.
 
-Steps:
+### Steps:
 1. Find the original method that we can override and store into a global variable    
 2. Define the overriding methods
 3. Have your custom logic in the method.
@@ -38,3 +38,5 @@ Steps:
     }
 })();
 {%endhighlight%}
+
+As you saw in the above snippet of post, we stored the original click event method into a `originalEvent` methods and overridden the `jQuery.fn.click` event by defining our custom function and we still triggered the original click event so that it will be fired in the jQuery library.
