@@ -13,7 +13,7 @@ cover: 'assets/covers/'
 description:
 ---
 
-Developers as I saw when they are given a task of filtering the table dynamically they go for a `Stored Proceedure` and they write a dynamic query based on those if's and execute them. But, if you are using Entity Framework, then it might be a little difficult to frame that dynamic query in LINQ.
+When developers they are given a task of filtering the table dynamically they go for a `Stored Proceedure` and they write a dynamic query based on those if's and execute them. But, if you are using Entity Framework, then it might be a little difficult to frame that dynamic query in LINQ.
 
 In this post, we will see how to build the dynamic LINQ queries. Building dynamic LINQ expressions is easy but you need to have an idea on [Func<T, TResult>](https://docs.microsoft.com/en-us/dotnet/api/system.func-2?view=netframework-4.7.2) and Expression Trees.
 
@@ -87,10 +87,12 @@ private static Func<User, bool> GetDynamicQueryWithFunc(string propName, object 
 }
 {%endhighlight%}
 
-In the above code snippet, we declared a Func delegate at the top and based on the property name we will assign the necessary linq query to the func delegate and return the func.
+In the above code snippet, we declared a Func delegate at the top and based on the property name we will assign the necessary linq query to the func delegate and return the delegate.
 
-Once we get the dynamic LINQ query from the method, we will apply that on a list of user data.
+Once we get the dynamic LINQ query from the method, we will apply that delegate on a list of user data.
 {%highlight csharp%}
 var dynamicExpression = GetDynamicQueryWithFunc(propertyName, value);
 var output = userData.Where(dynamicExpression).ToList();
 {%endhighlight%}
+
+But, this solution doesn't satisfy some of us atleast for the word "dynamic" because we've leveraged with switch-case. Now, let's do the real dynamic LINQ querying with Expression trees.
